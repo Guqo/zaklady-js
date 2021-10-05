@@ -140,29 +140,29 @@
         <div class="bg-light text-danger p-3">
           <h4>Matematické</h4>
           <code>
-              +, -, *, /, % (modulo - zbytek po celočíselném dělení), **
-              (umocnění)
-            </code>
+                +, -, *, /, % (modulo - zbytek po celočíselném dělení), **
+                (umocnění)
+              </code>
           <h4>Přiřazovací</h4>
           <code>
-            =, +=	, *= , -=, /=, ++, --
-            </code>
+                =, +=, -=, *=, /=, %=, **=
+              </code>
           <h4>Logické</h4>
           <code>
-              ...
-            </code>
+                &&, ||, !
+              </code>
           <h4>Porovnávací</h4>
           <code>
-              ...
-            </code>
+                ==, ===, !=, !==, >, <, >=, <=, ?
+              </code>
           <h4>Bitové</h4>
           <code>
-              ...
-            </code>
+                &, |, ~, ^, <<, >>, >>>
+              </code>
           <h4>Typové</h4>
           <code>
-              typeof (typ proměnné), instanceof (...)
-            </code>
+                typeof (typ proměnné), instanceof (používá se na kontrolu typu objektu když je spuštěn)
+              </code>
         </div>
       </div>
       <div class="col-sm-6 bg-secondary text-light p-5">
@@ -180,23 +180,23 @@
         <div class="bg-light text-danger p-3">
           <h4>alert()</h4>
           <code>
-              /* ... */<br />
+              /* Okno, říkající, že jste zadal špatné heslo */<br />
               alert('Nezadal jsi správné heslo!');
             </code>
           <h4>prompt()</h4>
           <code>
               /* Do proměnné password vloží heslo zadané uživatelem */<br />
-              ...
+              prompt("Please enter your name", "Harry Potter");
             </code>
           <h4>confirm()</h4>
           <code>
-              /* ... */<br />
+              /* Uživatel musí potvrdit jestli chce přejít na stránku seznam.cz */<br />
               if (confirm('Chceš přejít na stránky Seznam.cz?'))
               location.href='https://seznam.cz';
             </code>
           <hr />
           <p class="alert alert-primary" role="alert">
-            Varování:
+            Varování: Stránky používající popup okna mohou být podezřelé
           </p>
         </div>
       </div>
@@ -227,11 +227,14 @@
           <p>Zde bude řešení.</p>
         </div>
         <script>
-          let jmeno = Tomáš;
-          let prijmeni = Ryba;
-          let vaha = 70;
+          const sedmy = document.getElementById('sedmy');
+          let jmeno = 'Tomáš';
+          let prijmeni = 'Ryba'
+          sedmy.innerHTML = 'Ahoj já jsem ' + jmeno + ' ' + prijmeni;
+          let vaha = 69;
           let vyska = 180;
-          let celeJmeno = "Ahoj" jmeno + " " + prijmeni;
+          sedmy.innerHTML += `<p>Moje váha je <b>${vaha} kg</b>, měřím <mark>${vyska} cm</mark></p>`
+          sedmy.innerHTML += '<p>Escape \'sekvence\': &nbsp; &#x60; &#x488;</p>'
         </script>
       </div>
       <div class="col-sm-6 bg-secondary text-light p-5">
@@ -253,7 +256,7 @@
           Oblast myších zájmů
         </div>
         <script>
-          cons  t zmena = document.getElementById("osmy");
+          const zmena = document.getElementById("osmy");
 
           zmena.addEventListener("mouseenter", function () {
             this.style.fontSize = "25px";
@@ -288,12 +291,30 @@
           </ol>
         </blockquote>
         <div class="bg-info p-3">
-          <button onclick="">
+          <button id="zadejCislo">
             Zadej číslo
           </button>
         </div>
         <script>
-            < !--Zadejte JS kód-- >
+          const tlacitko = document.getElementById("zadejCislo");
+          function sudeLiche(cislo) {
+            if (isNaN(cislo)) {
+              return 'Zadaný string není číslo';
+            }
+            else if (cislo == 0) {
+              return 'Číslo je nula';
+            }
+            else if (cislo % 2 == 0) {
+              return 'Číslo je sudé';
+            }
+            else {
+              return 'Číslo je liché';
+            }
+          }
+          tlacitko.addEventListener("click", function () {
+            let zadaneCislo = prompt('Zadejte kladné číslo') || 0;
+            console.log(sudeLiche(zadaneCislo));
+          })
         </script>
       </div>
       <div class="col-sm-6 bg-secondary text-light p-5">
@@ -316,10 +337,34 @@
           </ol>
         </blockquote>
         <div class="bg-light p-3">
-          <a href="">Vypiš den</a>
+          <a href="javascript:denVTydnu()">Vypiš den</a>
         </div>
         <script>
-           < !--Zadejte JS kód-- >
+          function denVTydnu() {
+            const den = new Date().getDay()
+            switch (den) {
+              case 0:
+                alert('Dnes je Neděle')
+              case 1:
+                alert('Dnes je Pondělí')
+                break;
+              case 2:
+                alert('Dnes je Úterý')
+                break;
+              case 3:
+                alert('Dnes je Středa')
+                break;
+              case 4:
+                alert('Dnes je Čtvrtek')
+                break;
+              case 5:
+                alert('Dnes je Pátek')
+                break;
+              case 6:
+                alert('Dnes je Sobota')
+                break;
+            }
+          }
         </script>
       </div>
     </div>
