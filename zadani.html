@@ -276,13 +276,11 @@
         <h2>9: Podmínka if a funkce</h2>
         <blockquote class="blockquote">
           <p>
-            Vložte kód v JS, který do konzole vypíše informaci, zda zadané
-            číslo je liché, sudé, nebo nula:
+            Vložte kód v JS, který do konzole vypíše informaci, zda zadané číslo je liché, sudé, nebo nula:
           </p>
           <ol>
             <li>
-              Po kliknutí na tlačítko "Zadej číslo" zadá uživatel do popup
-              okna číslo.
+              Po kliknutí na tlačítko "Zadej číslo" zadá uživatel do popup okna číslo.
             </li>
             <li>
               Funkce "sudeLiche" vrátí vyhodnocení "sudosti/lichosti" čísla.
@@ -296,25 +294,22 @@
           </button>
         </div>
         <script>
-          const tlacitko = document.getElementById("zadejCislo");
+          const btn = document.getElementById("zadejCislo");
+          btn.addEventListener("click", function () {
+            let cislo = prompt("Zadej číslo: ");
+            let hodnota = sudeLiche(cislo);
+            console.log(`Zadané číslo ${cislo} je ${hodnota}`);
+          });
+
           function sudeLiche(cislo) {
-            if (isNaN(cislo)) {
-              return 'Zadaný string není číslo';
-            }
-            else if (cislo == 0) {
-              return 'Číslo je nula';
-            }
-            else if (cislo % 2 == 0) {
-              return 'Číslo je sudé';
-            }
-            else {
-              return 'Číslo je liché';
+            if (cislo == 0) {
+              return "nula";
+            } else if (cislo % 2 == 0) {
+              return "sudé";
+            } else {
+              return "liché";
             }
           }
-          tlacitko.addEventListener("click", function () {
-            let zadaneCislo = prompt('Zadejte kladné číslo') || 0;
-            console.log(sudeLiche(zadaneCislo));
-          })
         </script>
       </div>
       <div class="col-sm-6 bg-secondary text-light p-5">
@@ -344,24 +339,24 @@
             const den = new Date().getDay()
             switch (den) {
               case 0:
-                alert('Dnes je Neděle')
+                alert('Dnes je Neděle');
               case 1:
-                alert('Dnes je Pondělí')
+                alert('Dnes je Pondělí');
                 break;
               case 2:
-                alert('Dnes je Úterý')
+                alert('Dnes je Úterý');
                 break;
               case 3:
-                alert('Dnes je Středa')
+                alert('Dnes je Středa');
                 break;
               case 4:
-                alert('Dnes je Čtvrtek')
+                alert('Dnes je Čtvrtek');
                 break;
               case 5:
-                alert('Dnes je Pátek')
+                alert('Dnes je Pátek');
                 break;
               case 6:
-                alert('Dnes je Sobota')
+                alert('Dnes je Sobota');
                 break;
             }
           }
@@ -380,25 +375,48 @@
         <div class="bg-info p-3" id="jedenacty">
         </div>
         <script>
-            < !--Zadejte JS kód-- >
+          const seznam = document.getElementById('jedenacty');
+
+          function prestupny(rok1, rok2) {
+            let vysledek = '<ul>';
+            for (let y = rok1; y <= rok2; y++) {
+              if ((y % 4 == 0 && y % 100 != 0) || y % 400 == 0) {
+                vysledek += `<li>${y}</li>`;
+              }
+            }
+            return vysledek + '</ul>';
+          }
+          seznam.innerHTML = prestupny(1900, 2021);
         </script>
       </div>
-      <div class="col-sm-6 bg-secondary text-light p-5">
-        <h2>12: Cyklus while ve funkci</h2>
-        <blockquote class="blockquote">
-          <p>
-            Vytvořte v JS funkci, která zjistí, zda náhodně zadané číslo je prvočíslem:
-          </p>
-        </blockquote>
-        <div class="bg-info p-3" id="dvanacty">
+      <hr />
+      <div class="row">
+        <div class="col-sm-6 bg-secondary text-light p-5">
+          <h2>12: Cyklus while ve funkci</h2>
+          <blockquote class="blockquote">
+            <p>
+              Vytvořte v JS funkci, která zjistí, zda náhodně zadané číslo je prvočíslem:
+            </p>
+          </blockquote>
+          <div class="bg-info p-3" id="dvanacty">
+          </div>
+          <script>
+            let cislo = Math.floor(Math.random() * 1000);
+            const text = document.getElementById('dvanacty');
+            function kontrolaPrvocisla(cislo) {
+              if (cislo == 2) return true;
+              if (cislo <= 1 || cislo % 2 == 0) return false;
+              let delitel = 3;
+              while (delitel <= Math.ceil(Math.sqrt(cislo))) {
+                if (cislo % delitel == 0) return false;
+                delitel += 2;
+              }
+              return true;
+            }
+            text.innerHTML = `${cislo}, ${kontrolaPrvocisla(cislo)}`;
+          </script>
         </div>
-        <script>
-            < !--Zadejte JS kód-- >
-        </script>
       </div>
-    </div>
-    <hr />
-    <div class="row">
       <div class="col-sm-6 bg-dark text-light p-5">
         <h2>13: Datum a čas, využití pole</h2>
         <blockquote class="blockquote">
@@ -409,7 +427,14 @@
         <div class="bg-info p-3" id="trinacty">
         </div>
         <script>
-            < !--Zadejte JS kód-- >
+          const text2 = document.getElementById('trinacty');
+          const dny = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
+
+          function vypisCasu() {
+            let cas = new Date();
+            return `${dny[cas.getDay()]}, ${cas.toLocaleDateString()}, ${cas.toLocaleTimeString()}`;
+          }
+          text2.innerHTML = vypisCasu();
         </script>
       </div>
       <div class="col-sm-6 bg-secondary text-light p-5">
@@ -423,7 +448,13 @@
           <img src="img/hrad.webp" class="img-fluid" alt="foto" id="foto">
         </div>
         <script>
-            < !--Zadejte JS kód-- >
+          const fotka = document.getElementById('foto');
+          let fotky = ['hrad.webp', 'praha.jpg', 'staromak.jpg', 'vltava.jpg'];
+
+          function zmenFotku() {
+            fotka.src = `img/${fotky[Math.floor(Math.random() * fotky.length)]}`;
+          }
+          setInterval(zmenFotku, 1000);
         </script>
       </div>
     </div>
